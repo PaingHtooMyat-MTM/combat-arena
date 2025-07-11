@@ -3,24 +3,35 @@ package com.paing.combatarena.logic;
 import com.paing.combatarena.model.Character;
 import com.paing.combatarena.model.Enemy;
 import com.paing.combatarena.model.Player;
+import com.paing.combatarena.ui.BattleUI;
+import com.paing.combatarena.ui.InputHandler;
+import com.paing.combatarena.ui.MenuPrinter;
+import com.paing.combatarena.utils.ColorCode;
 
 import java.util.ArrayList;
 
 public class CombatManager {
     private Player player;
     private ArrayList<Enemy> enemies;
+    private BattleUI battleUI;
+    private InputHandler inputHandler;
+    private MenuPrinter menuPrinter;
 
     public CombatManager(Player player, ArrayList<Enemy> enemies) {
         this.player = player;
         this.enemies = enemies;
+        this.battleUI = new BattleUI();
+        this.inputHandler = new InputHandler();
+        this.menuPrinter = new MenuPrinter();
     }
 
     public void startBattle() {
-        System.out.println("Battle Start!");
+        menuPrinter.printStartMessage();
         delay(1000);
 
         while (player.isAlive() && enemies.stream().anyMatch(Enemy::isAlive)) {
             ArrayList<Character> enemyCharacters = new ArrayList<>(enemies);
+            battleUI.displayTurnBanner(player, ColorCode.GREEN );
             player.takeTurn(enemyCharacters);
             delay(2000);
 
@@ -29,6 +40,7 @@ public class CombatManager {
 
             for (Enemy enemy : enemies) {
                 if (enemy.isAlive()) {
+                    battleUI.displayTurnBanner(enemy, ColorCode.RED);
                     enemy.takeTurn(playerList);
                     delay(2000);
                 }
@@ -36,9 +48,9 @@ public class CombatManager {
         }
 
         if (player.isAlive()) {
-            System.out.println("You won the battle!");
+            menuPrinter.printVictory();
         } else {
-            System.out.println("You were defeated.");
+            menuPrinter.printDefeat();
         }
     }
 

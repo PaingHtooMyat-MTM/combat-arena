@@ -1,5 +1,7 @@
 package com.paing.combatarena.model;
 
+import com.paing.combatarena.utils.ColorCode;
+
 import java.util.ArrayList;
 
 public abstract class Character {
@@ -31,11 +33,17 @@ public abstract class Character {
         int actualDamage = Math.max(damage - defense, 0);
         health -= actualDamage;
         if (health < 0) health = 0;
-        System.out.println(name + " took " + actualDamage + " damage. Remaining HP: " + health);
+
+        String nameColor = this instanceof Player ? ColorCode.GREEN.toString() : ColorCode.RED.toString();
+
+        System.out.println(nameColor + name + ColorCode.RESET + " took " + actualDamage + " damage. Remaining HP: " + ColorCode.GREEN + health + ColorCode.RESET);
     }
 
     public void attack(Character target) {
-        System.out.println(name + " attacks " + target.getName());
+        String attackerColor = this instanceof Player ? ColorCode.GREEN.toString() : ColorCode.RED.toString();
+        String targetColor = target instanceof Player ? ColorCode.GREEN.toString() : ColorCode.RED.toString();
+
+        System.out.println(attackerColor + name + ColorCode.RESET + " attacks " + targetColor + target.getName() + ColorCode.RESET + "!");
         target.takeDamage(attack);
     }
 

@@ -29,7 +29,7 @@ public class Enemy extends Character {
         }
 
         Character target = aliveOpponents.get(random.nextInt(aliveOpponents.size()));
-        System.out.println("\n" + name + "'s turn.");
+//        System.out.println("\n" + name + "'s turn.");
         attack(target);
     }
 }
