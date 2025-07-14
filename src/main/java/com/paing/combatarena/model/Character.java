@@ -10,9 +10,9 @@ public abstract class Character {
     protected int attack;
     protected int defense;
 
-    protected final int baseHealth;
-    protected final int baseAttack;
-    protected final int baseDefense;
+    protected int baseHealth;
+    protected int baseAttack;
+    protected int baseDefense;
 
     public Character(String name, int health, int attack, int defense) {
         this.name = name;

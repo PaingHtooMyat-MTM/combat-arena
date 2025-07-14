@@ -20,17 +20,14 @@ public class MainMenu {
     }
 
 
-
     public void show() {
         boolean running = true;
         while (running) {
 
             System.out.println("\n====== Main Menu ======\n");
             System.out.println(ColorCode.CYAN + "1." + ColorCode.RESET + " Enter Battle");
-            System.out.println(ColorCode.CYAN + "2." + ColorCode.RESET + " Upgrade Stats");
-            System.out.println(ColorCode.CYAN + "3." + ColorCode.RESET + " Upgrade Weapon");
-            System.out.println(ColorCode.CYAN + "4." + ColorCode.RESET + " View Stats");
-            System.out.println(ColorCode.CYAN + "5." + ColorCode.RESET + " Exit");
+            System.out.println(ColorCode.CYAN + "2." + ColorCode.RESET + " View Stats");
+            System.out.println(ColorCode.CYAN + "3." + ColorCode.RESET + " Exit");
 
             int choice = inputHandler.getIntInput("\nEnter choice: ");
 
@@ -39,15 +36,9 @@ public class MainMenu {
                     initializeEnemiesAndStartBattle();
                     break;
                 case 2:
-//                    upgradeStats();
-                    break;
-                case 3:
-//                    upgradeWeapon();
-                    break;
-                case 4:
                     viewStats();
                     break;
-                case 5: {
+                case 3: {
                     System.out.println("Exiting game. Goodbye!");
                     running = false;
                     break;
@@ -74,11 +65,12 @@ public class MainMenu {
                 break;  // Exited early, stop game progression
             }
 
-            if(!player.isAlive()){
+            if (!player.isAlive()) {
                 player.resetStats();
-                break;
+                currentStage = Math.max(currentStage - 1, 0); // go back one stage
+                System.out.println(ColorCode.RED + "You were defeated! Returning to Stage " + (currentStage + 1) + " to farm EXP." + ColorCode.RESET);
+                return;
             }
-
 
             // Only update stage if player won
             currentStage = stage + 1;
@@ -89,31 +81,10 @@ public class MainMenu {
         System.out.println(ColorCode.GREEN + "\n🎉 You've completed the game! GG! 🎉" + ColorCode.RESET);
     }
 
-//    private void upgradeStats() {
-//        System.out.println("Choose a stat to upgrade:");
-//        System.out.println("1. Increase HP (+20)");
-//        System.out.println("2. Increase DEF (+2)");
-//
-//        int choice = scanner.nextInt();
-//        switch (choice) {
-//            case 1:
-//                //  player.increaseHealth(20);
-//                System.out.println("HP upgraded!");
-//            case 2:
-////                player.increaseDefense(2);
-//                System.out.println("DEF upgraded!");
-//            default:
-//                System.out.println("Invalid choice.");
-//        }
-//    }
-//
-//    private void upgradeWeapon() {
-//        System.out.println("Weapon upgraded! ATK +5");
-
-    ////        player.increaseAttack(5);
-//    }
     private void viewStats() {
         System.out.println(ColorCode.BLUE + "\n=== Your Stats ===" + ColorCode.RESET);
+        System.out.println("Level: " + ColorCode.YELLOW + player.getLevel() + ColorCode.RESET);
+        System.out.println("EXP: " + ColorCode.YELLOW + player.getExp() + "/" + player.getExpToLevel() + ColorCode.RESET);
         System.out.println("Name: " + ColorCode.YELLOW + player.getName() + ColorCode.RESET);
         System.out.println("HP: " + ColorCode.YELLOW + player.getHealth() + ColorCode.RESET);
         System.out.println("ATK: " + ColorCode.YELLOW + player.getAttack() + ColorCode.RESET);

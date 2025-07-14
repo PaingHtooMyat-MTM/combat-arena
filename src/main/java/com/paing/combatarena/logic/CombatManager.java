@@ -53,9 +53,17 @@ public class CombatManager {
         }
 
         if (player.isAlive()) {
+            int totalExp = 0;
+            for (Enemy enemy : enemies) {
+                if (!enemy.isAlive()) {
+                    totalExp += enemy.getExpReward();
+                }
+            }
+            player.gainExp(totalExp);
             menuPrinter.printVictory();
         } else {
             menuPrinter.printDefeat();
+            return false;
         }
         return true;
     }

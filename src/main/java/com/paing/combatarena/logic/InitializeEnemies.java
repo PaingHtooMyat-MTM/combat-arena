@@ -8,38 +8,38 @@ import java.util.List;
 public class InitializeEnemies {
 
     public static List<List<Enemy>> getEnemiesPerStage() {
-        List<List<Enemy>> levels = new ArrayList<>();
+        List<List<Enemy>> stages = new ArrayList<>();
 
-        // Level 1 enemies
-        List<Enemy> level1 = new ArrayList<>();
-        level1.add(new Enemy("Goblin", 140, 10, 2));
-        level1.add(new Enemy("Rat", 140, 5, 1));
-        levels.add(level1);
+        // Stage 1
+        List<Enemy> stage1 = new ArrayList<>();
+        stage1.add(new Enemy("Goblin", 100, 10, 5, 25));
+        stage1.add(new Enemy("Rat", 80, 8, 3, 20));
+        stages.add(stage1);
 
-        // Level 2 enemies
-        List<Enemy> level2 = new ArrayList<>();
-        level2.add(new Enemy("Orc", 200, 10, 4));
-        level2.add(new Enemy("Orc Archer", 150, 20, 5));
-        levels.add(level2);
+        // Stage 2
+        List<Enemy> stage2 = new ArrayList<>();
+        stage2.add(new Enemy("Orc", 150, 20, 10, 40));
+        stage2.add(new Enemy("Orc Archer", 120, 25, 8, 35));
+        stages.add(stage2);
 
-        // Level 3 enemies
-        List<Enemy> level3 = new ArrayList<>();
-        level3.add(new Enemy("Troll", 250, 20, 6));
-        level3.add(new Enemy("Dark Elf", 200, 30, 7));
-        levels.add(level3);
+        // Stage 3
+        List<Enemy> stage3 = new ArrayList<>();
+        stage3.add(new Enemy("Troll", 220, 30, 15, 55));
+        stage3.add(new Enemy("Dark Elf", 180, 35, 12, 60));
+        stages.add(stage3);
 
-        // Level 4 enemies
-        List<Enemy> level4 = new ArrayList<>();
-        level4.add(new Enemy("Wraith", 150, 40, 8));
-        level4.add(new Enemy("Dread Knight", 350, 20, 20));
-        levels.add(level4);
+        // Stage 4
+        List<Enemy> stage4 = new ArrayList<>();
+        stage4.add(new Enemy("Wraith", 160, 55, 18, 70));
+        stage4.add(new Enemy("Dread Knight", 300, 40, 25, 80));
+        stages.add(stage4);
 
-        // Level 5 enemies
-        List<Enemy> level5 = new ArrayList<>();
-        level5.add(new Enemy("Dragon", 500, 50, 35));
-        level5.add(new Enemy("Dark Sorcerer", 250, 40, 10));
-        levels.add(level5);
+        // Stage 5
+        List<Enemy> stage5 = new ArrayList<>();
+        stage5.add(new Enemy("Dragon", 500, 50, 40, 150));
+        stage5.add(new Enemy("Dark Sorcerer", 250, 55, 20, 100));
+        stages.add(stage5);
 
-        return levels;
+        return stages;
     }
 }

@@ -11,10 +11,22 @@ public class PlayerCreator {
 
     public Player createPlayer() {
         while (true) {
-            System.out.println("Choose a " + ColorCode.CYAN + "character " + ColorCode.RESET + "class:");
-            System.out.println(ColorCode.CYAN + "1." + ColorCode.RESET + " Warrior");
-            System.out.println(ColorCode.CYAN + "2." + ColorCode.RESET + " Archer");
-            System.out.println(ColorCode.CYAN + "3." + ColorCode.RESET + " Mage");
+            System.out.println("Choose a " + ColorCode.CYAN + "character" + ColorCode.RESET + " class:\n");
+
+            System.out.println(ColorCode.CYAN + "1. Warrior" + ColorCode.RESET + " - Tanky with moderate damage");
+            System.out.println("   HP: " + ColorCode.YELLOW + "250" + ColorCode.RESET +
+                    " | ATK: " + ColorCode.YELLOW + "60" + ColorCode.RESET +
+                    " | DEF: " + ColorCode.YELLOW + "30" + ColorCode.RESET + "\n");
+
+            System.out.println(ColorCode.CYAN + "2. Archer" + ColorCode.RESET + " - Balanced, fast attacker");
+            System.out.println("   HP: " + ColorCode.YELLOW + "200" + ColorCode.RESET +
+                    " | ATK: " + ColorCode.YELLOW + "75" + ColorCode.RESET +
+                    " | DEF: " + ColorCode.YELLOW + "20" + ColorCode.RESET + "\n");
+
+            System.out.println(ColorCode.CYAN + "3. Mage" + ColorCode.RESET + " - High burst damage, low defense");
+            System.out.println("   HP: " + ColorCode.YELLOW + "150" + ColorCode.RESET +
+                    " | ATK: " + ColorCode.YELLOW + "90" + ColorCode.RESET +
+                    " | DEF: " + ColorCode.YELLOW + "10" + ColorCode.RESET + "\n");
 
             int choice = inputHandler.getIntInput("Enter choice: ");
 

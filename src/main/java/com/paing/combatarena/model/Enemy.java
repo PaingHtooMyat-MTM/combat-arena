@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Enemy extends Character {
+    private final int expReward;
 
     private static final Random random = new Random();
 
-    public Enemy(String name, int health, int attack, int defense) {
+    public Enemy(String name, int health, int attack, int defense, int expReward) {
         super(name, health, attack, defense);
+        this.expReward = expReward;
+    }
+
+    public int getExpReward() {
+        return expReward;
     }
 
     @Override
