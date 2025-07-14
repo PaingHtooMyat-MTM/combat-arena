@@ -9,7 +9,9 @@ public class InputHandler {
         while (true) {
             System.out.print(prompt);
             if (scanner.hasNextInt()) {
-                return scanner.nextInt();
+                int val = scanner.nextInt();
+                scanner.nextLine(); // consume leftover newline
+                return val;
             } else {
                 System.out.println("Invalid input. Please enter a number.");
                 scanner.next(); // discard invalid input
@@ -19,10 +21,6 @@ public class InputHandler {
 
     public String getStringInput(String prompt) {
         System.out.print(prompt);
-        while (!scanner.hasNext()) {
-            scanner.next();
-            System.out.print("Invalid input. " + prompt);
-        }
-        return scanner.next();
+        return scanner.nextLine();
     }
 }
