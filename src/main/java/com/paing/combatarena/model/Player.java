@@ -58,9 +58,11 @@ public class Player extends Character {
                     Character enemy = enemies.get(i);
                     String status = enemy.isAlive() ? "" : (ColorCode.RED + " [DEAD]" + ColorCode.RESET);
                     System.out.println(
-                            String.valueOf(ColorCode.CYAN) + (i + 1) + ". " +
-                                    ColorCode.RESET + enemy.getName() + " (HP: " +
-                                    ColorCode.YELLOW + enemy.getHealth() + ColorCode.RESET + ")" + status
+                            String.valueOf(ColorCode.CYAN) +(i + 1) + ". " + ColorCode.RESET +
+    enemy.getName() + " (HP: " + ColorCode.YELLOW + enemy.getHealth() + ColorCode.RESET +
+    ", ATK: " + ColorCode.YELLOW + enemy.getAttack() + ColorCode.RESET +
+    ", DEF: " + ColorCode.YELLOW + enemy.getDefense() + ColorCode.RESET + ")" +
+    status
                     );
                 }
 

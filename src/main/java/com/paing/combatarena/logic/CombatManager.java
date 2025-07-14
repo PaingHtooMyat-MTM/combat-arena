@@ -23,7 +23,7 @@ public class CombatManager {
         this.menuPrinter = new MenuPrinter();
     }
 
-    public void startBattle() {
+    public boolean startBattle() {
         menuPrinter.printStartMessage();
         DelayUtil.delay(1000);
 
@@ -35,7 +35,7 @@ public class CombatManager {
             if (player.wantsToExitBattle()) {
                 player.setExitBattle(false); // reset the flag for next battle
                 DelayUtil.delay(2000);
-                return; // immediately stop the battle
+                return false; // immediately stop the battle
             }
 
             DelayUtil.delay(2000);
@@ -57,5 +57,6 @@ public class CombatManager {
         } else {
             menuPrinter.printDefeat();
         }
+        return true;
     }
 }

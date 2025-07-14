@@ -10,11 +10,18 @@ public abstract class Character {
     protected int attack;
     protected int defense;
 
+    protected final int baseHealth;
+    protected final int baseAttack;
+    protected final int baseDefense;
+
     public Character(String name, int health, int attack, int defense) {
         this.name = name;
         this.health = health;
         this.attack = attack;
         this.defense = defense;
+        this.baseHealth = health;
+        this.baseAttack = attack;
+        this.baseDefense = defense;
     }
 
     public String getName() {
@@ -35,6 +42,12 @@ public abstract class Character {
 
     public boolean isAlive() {
         return health > 0;
+    }
+
+    public void resetStats() {
+        this.health = baseHealth;
+        this.attack = baseAttack;
+        this.defense = baseDefense;
     }
 
     public void takeDamage(int damage) {

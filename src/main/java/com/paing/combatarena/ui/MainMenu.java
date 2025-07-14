@@ -8,14 +8,18 @@ import com.paing.combatarena.utils.ColorCode;
 import com.paing.combatarena.utils.DelayUtil;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainMenu {
     private final InputHandler inputHandler = new InputHandler();
     private final Player player;
+    private int currentStage = 0; // 0-based index, meaning Stage 1
 
     public MainMenu(Player player) {
         this.player = player;
     }
+
+
 
     public void show() {
         boolean running = true;
@@ -55,10 +59,34 @@ public class MainMenu {
     }
 
     private void initializeEnemiesAndStartBattle() {
-        ArrayList<Enemy> enemies = InitializeEnemies.getEnemies();
+        List<List<Enemy>> stages = InitializeEnemies.getEnemiesPerStage();
 
-        CombatManager manager = new CombatManager(player, enemies);
-        manager.startBattle();
+        for (int stage = currentStage; stage < stages.size(); stage++) {
+            System.out.println("\n=== STAGE " + (stage + 1) + " ===");
+
+            List<Enemy> enemiesThisStage = stages.get(stage);
+
+            CombatManager manager = new CombatManager(player, new ArrayList<>(enemiesThisStage));
+            boolean completed = manager.startBattle();
+
+            if (!completed) {
+                System.out.println("Exiting battle. Progress saved at Stage " + (stage + 1));
+                break;  // Exited early, stop game progression
+            }
+
+            if(!player.isAlive()){
+                player.resetStats();
+                break;
+            }
+
+
+            // Only update stage if player won
+            currentStage = stage + 1;
+            player.resetStats(); // Reset stats for next stage
+
+            System.out.println("Stage " + (stage + 1) + " complete!\n");
+        }
+        System.out.println(ColorCode.GREEN + "\n🎉 You've completed the game! GG! 🎉" + ColorCode.RESET);
     }
 
 //    private void upgradeStats() {
