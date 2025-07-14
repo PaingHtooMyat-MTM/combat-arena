@@ -4,36 +4,41 @@ import com.paing.combatarena.model.Character;
 import com.paing.combatarena.model.Enemy;
 import com.paing.combatarena.model.Player;
 import com.paing.combatarena.ui.BattleUI;
-import com.paing.combatarena.ui.InputHandler;
 import com.paing.combatarena.ui.MenuPrinter;
 import com.paing.combatarena.utils.ColorCode;
+import com.paing.combatarena.utils.DelayUtil;
 
 import java.util.ArrayList;
 
 public class CombatManager {
-    private Player player;
-    private ArrayList<Enemy> enemies;
-    private BattleUI battleUI;
-    private InputHandler inputHandler;
-    private MenuPrinter menuPrinter;
+    final private Player player;
+    final private ArrayList<Enemy> enemies;
+    final private BattleUI battleUI;
+    final private MenuPrinter menuPrinter;
 
     public CombatManager(Player player, ArrayList<Enemy> enemies) {
         this.player = player;
         this.enemies = enemies;
         this.battleUI = new BattleUI();
-        this.inputHandler = new InputHandler();
         this.menuPrinter = new MenuPrinter();
     }
 
     public void startBattle() {
         menuPrinter.printStartMessage();
-        delay(1000);
+        DelayUtil.delay(1000);
 
         while (player.isAlive() && enemies.stream().anyMatch(Enemy::isAlive)) {
             ArrayList<Character> enemyCharacters = new ArrayList<>(enemies);
             battleUI.displayTurnBanner(player, ColorCode.GREEN );
             player.takeTurn(enemyCharacters);
-            delay(2000);
+
+            if (player.wantsToExitBattle()) {
+                player.setExitBattle(false); // reset the flag for next battle
+                DelayUtil.delay(2000);
+                return; // immediately stop the battle
+            }
+
+            DelayUtil.delay(2000);
 
             ArrayList<Character> playerList = new ArrayList<>();
             playerList.add(player);
@@ -42,7 +47,7 @@ public class CombatManager {
                 if (enemy.isAlive()) {
                     battleUI.displayTurnBanner(enemy, ColorCode.RED);
                     enemy.takeTurn(playerList);
-                    delay(2000);
+                    DelayUtil.delay(2000);
                 }
             }
         }
@@ -51,15 +56,6 @@ public class CombatManager {
             menuPrinter.printVictory();
         } else {
             menuPrinter.printDefeat();
-        }
-    }
-
-    private void delay(int milliseconds) {
-        try {
-            Thread.sleep(milliseconds);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            System.out.println("Interrupted!");
         }
     }
 }

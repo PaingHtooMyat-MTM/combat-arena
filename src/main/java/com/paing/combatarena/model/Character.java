@@ -25,6 +25,14 @@ public abstract class Character {
         return health;
     }
 
+    public int getAttack() {
+        return attack;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
     public boolean isAlive() {
         return health > 0;
     }

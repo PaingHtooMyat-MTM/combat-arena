@@ -1,15 +1,17 @@
 package com.paing.combatarena.ui;
 
+import com.paing.combatarena.utils.ColorCode;
+
 public class MenuPrinter {
     public void printStartMessage() {
-        System.out.println("===== Battle Start! =====");
+        System.out.println("\n=====  Battle Start =====");
     }
 
     public void printVictory() {
-        System.out.println("You won the battle! 🎉");
+        System.out.println("\nYou won the battle! 🎉");
     }
 
     public void printDefeat() {
-        System.out.println("You were defeated. 💀");
+        System.out.println("\nYou were defeated. 💀");
     }
 }
