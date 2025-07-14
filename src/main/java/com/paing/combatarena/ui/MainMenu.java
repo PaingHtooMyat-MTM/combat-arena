@@ -78,7 +78,9 @@ public class MainMenu {
 
             System.out.println("Stage " + (stage + 1) + " complete!\n");
         }
-        System.out.println(ColorCode.GREEN + "\n🎉 You've completed the game! GG! 🎉" + ColorCode.RESET);
+        if (currentStage >= stages.size()) {
+            System.out.println(ColorCode.GREEN + "\n🎉 You've completed the game! GG! 🎉" + ColorCode.RESET);
+        }
     }
 
     private void viewStats() {
